@@ -1,15 +1,21 @@
 const geoip = require('geoip-lite')
 
 const searchController = {
-  location: (req, res) => {
+  location: async (req, res) => {
     const ip = req.body.ip.split(',')
     const ipLocation = []
+    let dataVol = ip.length
+    let invalidVol = 0
     for (let i = 0; i < ip.length; i++) {
-      const result = geoip.lookup(ip[i])
-      result.IP= ip[i]
-      ipLocation.push(result)
+      const result = await geoip.lookup(ip[i])
+      if (result === null) {
+        invalidVol++
+      } else {
+        result.IP = ip[i]
+        ipLocation.push(result)
+      }
     }
-    res.render('result', { ipLocation })
+    res.render('result', { dataVol, invalidVol, ipLocation })
   }
 
 }
