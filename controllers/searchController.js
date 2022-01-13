@@ -1,8 +1,10 @@
 const geoip = require('geoip-lite')
+const xlsx = require('xlsx')
 
 const searchController = {
   location: async (req, res) => {
-    const ip = req.body.ip.split(',')
+    //將使用者輸入資料整理成lib可用格式
+    const ip = req.body.ip.split(",\r\n")
     const ipLocation = []
     let dataVol = ip.length
     let invalidVol = 0
@@ -16,7 +18,17 @@ const searchController = {
       }
     }
     let successVol = dataVol - invalidVol
-    res.render('result', { dataVol, successVol, invalidVol, ipLocation })
+    //網頁顯示結果
+    res.render('result', { dataVol, invalidVol, successVol, ipLocation })
+    //建立excel
+    let searchResult = xlsx.utils.json_to_sheet(ipLocation)
+    let workBook = {
+      SheetNames: ['searchResult'],
+      Sheets: {
+        'searchResult': searchResult,
+      }
+    }
+    return xlsx.writeFile(workBook, "../result.xlsx")
   }
 
 }
