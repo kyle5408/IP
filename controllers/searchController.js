@@ -1,5 +1,7 @@
 const geoip = require('geoip-lite')
 const xlsx = require('xlsx')
+const FormulaParser = require('hot-formula-parser').Parser
+const parser = new FormulaParser()
 
 
 const searchController = {
@@ -36,9 +38,8 @@ const searchController = {
     const workbook = xlsx.readFile('./public/data/uploads/' + req.file.filename)
     const sheetNames = workbook.SheetNames
     const worksheet = workbook.Sheets[sheetNames[0]]
-    console.log(worksheet['!ref'])
     const ipLocation = []
-    let dataVol = 5
+    let dataVol = Number(worksheet['!ref'].substring(4))
     let invalidVol = 0
     for (let i = 0; i < dataVol; i++) {
       let temIP = worksheet[`A${i}`]
