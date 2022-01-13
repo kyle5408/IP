@@ -1,18 +1,27 @@
-<form action="/search" method="POST">
-  <div class="input-group">
-    <span class="input-group-text">IP</span>
-    <textarea class="form-control" aria-label="With textarea" name="ip" placeholder="資料請以逗號+換行隔開"></textarea>
-  </div>
+<div>
+  輸入IP查詢
+  <form action="/search" method="POST">
+    <div class="input-group">
+      <span class="input-group-text">IP</span>
+      <textarea class="form-control" aria-label="With textarea" name="ip" placeholder="資料請以逗號+換行隔開"></textarea>
+    </div>
 
-  <div class="text-align-center mt-4">
-    <button type="submit" class="btn signin-button">查詢</button>
-  </div>
-</form>
+    <div class="text-align-center mt-4">
+      <button type="submit" class="btn signin-button">查詢</button>
+    </div>
+  </form>
+</div>
+
+<hr>
 
 <div class="mt-2">
+  Excel上傳
   <form action="/upload" enctype="multipart/form-data" method="POST">
-  <label>
-    <input type="file" class="form-control-file" name="uploaded_file">
+    <div>
+      *資料需皆置於A欄位
+    </div>
+    <label>
+      <input type="file" class="form-control-file" name="uploaded_file">
     </label>
     <button type="submit" class="btn signin-button">上傳</button>
   </form>
