@@ -1,8 +1,5 @@
 const geoip = require('geoip-lite')
 const xlsx = require('xlsx')
-const FormulaParser = require('hot-formula-parser').Parser
-const parser = new FormulaParser()
-
 
 const searchController = {
   location: async (req, res) => {
