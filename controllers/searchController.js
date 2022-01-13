@@ -15,7 +15,8 @@ const searchController = {
         ipLocation.push(result)
       }
     }
-    res.render('result', { dataVol, invalidVol, ipLocation })
+    let successVol = dataVol - invalidVol
+    res.render('result', { dataVol, successVol, invalidVol, ipLocation })
   }
 
 }
