@@ -2,7 +2,7 @@ const geoip = require('geoip-lite')
 const xlsx = require('xlsx')
 
 const searchController = {
-  location: async (req, res) => {
+  search: async (req, res) => {
     //將使用者輸入資料整理成lib可用格式
     const ip = req.body.ip.split(",\r\n")
     const ipLocation = []
@@ -21,11 +21,18 @@ const searchController = {
     //網頁顯示結果
     res.render('result', { dataVol, invalidVol, successVol, ipLocation })
     //建立excel
+    let summaryJson = [{
+      '輸入IP數': dataVol,
+      '有效IP數': successVol,
+      '無效IP數': invalidVol
+    }]
+    let summary = xlsx.utils.json_to_sheet(summaryJson)
     let searchResult = xlsx.utils.json_to_sheet(ipLocation)
     let workBook = {
-      SheetNames: ['searchResult'],
+      SheetNames: ['summary', 'searchResult'],
       Sheets: {
-        'searchResult': searchResult,
+        'summary': summary,
+        'searchResult': searchResult
       }
     }
     return xlsx.writeFile(workBook, "../result.xlsx")
@@ -56,11 +63,18 @@ const searchController = {
     //網頁顯示結果
     res.render('result', { dataVol, invalidVol, successVol, ipLocation })
     //建立excel
+    let summaryJson = [{
+      '輸入IP數': dataVol,
+      '有效IP數': successVol,
+      '無效IP數': invalidVol
+    }]
+    let summary = xlsx.utils.json_to_sheet(summaryJson)
     let searchResult = xlsx.utils.json_to_sheet(ipLocation)
     let workBook = {
-      SheetNames: ['searchResult'],
+      SheetNames: ['summary', 'searchResult'],
       Sheets: {
-        'searchResult': searchResult,
+        'summary': summary,
+        'searchResult': searchResult
       }
     }
     return xlsx.writeFile(workBook, "../result.xlsx")

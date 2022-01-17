@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
   res.render('index')
 })
 
-router.post('/search', searchController.location)
+router.post('/search', searchController.search)
 router.post('/upload', upload.single('uploaded_file'), searchController.upload)
 
 module.exports = router
