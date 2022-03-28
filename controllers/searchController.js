@@ -77,7 +77,7 @@ const searchController = {
         'searchResult': searchResult
       }
     }
-    return xlsx.writeFile(workBook, "../result.xlsx")
+    return xlsx.writeFile(workBook, "../ip_search_result.xlsx")
   }
 
 }
