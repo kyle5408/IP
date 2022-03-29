@@ -11,12 +11,14 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage })
 const searchController = require('../controllers/searchController')
+const mysqlController = require('../controllers/mysqlController')
 
 router.get('/', (req, res) => {
   res.render('index')
 })
 
 router.post('/search', searchController.search)
-router.post('/upload', upload.single('uploaded_file'), searchController.upload)
+router.post('/searchDB', mysqlController.search)
+router.post('/upload', upload.single('uploaded_file'), searchController.upload) 
 
 module.exports = router

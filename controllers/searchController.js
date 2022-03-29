@@ -68,6 +68,7 @@ const searchController = {
       '有效IP數': successVol,
       '無效IP數': invalidVol
     }]
+    console.log(ipLocation)
     let summary = xlsx.utils.json_to_sheet(summaryJson)
     let searchResult = xlsx.utils.json_to_sheet(ipLocation)
     let workBook = {

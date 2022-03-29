@@ -11,6 +11,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
 
+
+require('dotenv').config();
 const routes = require('./routes')
 const port = 3000
 
